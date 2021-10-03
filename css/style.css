@@ -1,0 +1,123 @@
+/* for devlopment mode ele style */
+.deploy-test-mode{
+    z-index: 9;
+    user-select: none;
+    position: absolute;
+    top: 0;
+    padding: 1rem;
+    text-align: center;
+}
+.colliders-toggle{
+    margin: .1rem ;
+}
+
+/*  */
+
+.game-container{
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    position: relative;
+    background-color: purple;
+    overflow: hidden;
+}
+
+.road-object{
+    width: 100%;
+    height: 100%;
+    background-color: purple;
+    transition: all .1s;
+    background-image: url(../assets/road-highway.jpg);
+    background-repeat: repeat-y;
+    background-size: 100% 100%;
+}
+
+.bike-object, .car-object{
+    position: absolute;
+    bottom: 14rem;
+    width: 8rem;
+    height: 4rem;
+    left: 9rem;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+}
+
+.car-object{
+    position: absolute;
+    top: -15rem;
+    left: 4rem;
+    width: 6rem;
+    height: 9rem;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+}
+
+.handle-object{
+    width: 100%;
+    height: 15vh;
+    /* background-color: pink; */
+    z-index: 999;
+    transition: all .1s;
+    -webkit-transition: all .1s;
+    -moz-transition: all .1s;
+    -ms-transition: all .1s;
+    -o-transition: all .1s;
+    overflow: hidden;
+}
+.handle-side{
+    background-color: black;
+    width: 120px;
+    cursor: pointer;
+    height: 5vh;
+    box-shadow: 0 0 .1rem grey;
+}
+.handle-left{
+    border-radius: 2rem 0 2rem 0;
+    -webkit-border-radius: 2rem 0 2rem 0;
+    -moz-border-radius: 2rem 0 2rem 0;
+    -ms-border-radius: 2rem 0 2rem 0;
+    -o-border-radius: 2rem 0 2rem 0;
+}
+.handle-right{
+    border-radius: 0 2rem 0 2rem;
+    -webkit-border-radius: 0 2rem 0 2rem;
+    -moz-border-radius: 0 2rem 0 2rem;
+    -ms-border-radius: 0 2rem 0 2rem;
+    -o-border-radius: 0 2rem 0 2rem;
+}
+
+.menu-container{
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+    background-color: rgba(161, 91, 91, 0.1);
+}
+.play{
+    width: 5rem;
+    height: 3rem;
+    cursor: pointer;
+    opacity: .9;
+    color: white;
+    box-sizing: border-box;
+    transform: translateX(1.5rem);
+    border: 1.8rem solid transparent;
+    border-left-color: green;
+    -webkit-transform: translateX(1.5rem);
+    -moz-transform: translateX(1.5rem);
+    -ms-transform: translateX(1.5rem);
+    -o-transform: translateX(1.5rem);
+}
+
+.score-box{
+    color: white;
+    z-index: 999999;
+    font-size: 1.2rem;
+    font-family: monospace;
+    padding: .5rem 0 0 .5rem;
+    text-shadow: 1px 1px 5px black;
+}

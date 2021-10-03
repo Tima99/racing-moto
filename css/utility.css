@@ -1,0 +1,88 @@
+
+/* reset */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
+
+/** utilities */
+
+/* full width */
+.full{
+    width:  100%;
+    height: 100vh;
+}
+
+.abs{
+    position: absolute;
+}
+.abs-top{
+    position: absolute;
+    top: 0;
+}
+.abs-bottom{
+    position: absolute;
+    bottom: 0;
+}
+.top-0{
+    top: 0;
+}
+
+/* display flex css */
+.flex{
+    display: flex;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex.left-center{
+    justify-content: center;
+}
+.flex-col.left-center{
+    align-items: center;
+}
+
+.flex.top-center{
+    align-items: center;
+}
+.flex-col.top-center{
+    justify-content: center;
+}
+
+.spc-evn{
+    justify-content: space-evenly;
+}
+.spc-btw{
+    justify-content: space-between;
+}
+
+
+/* view is images element append inside any div(object) */
+.view{
+    width: 100%;
+    height: 100%;
+}
+
+
+.box-collider{
+    border: 1px solid red;
+}
