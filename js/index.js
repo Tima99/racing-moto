@@ -44,19 +44,20 @@ document.querySelector(".play").addEventListener("click" , start)
 function start(){
 
         // make the element go to full-screen mode
-        document.body.requestFullscreen()
-        .then(function() {
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+        // document.body.requestFullscreen()
+        // .then(function() {
+        // })
+        // .catch(function(error) {
+        //     console.log(error);
+        // });
 
     document.querySelector(".play").style.borderLeftColor = 'red';
     document.querySelector(".menu-container").style.display = 'none';
-    roadAnimFrame = requestAnimationFrame(moveRoad) // animate road
+    requestAnimationFrame(moveRoad) // animate road
     // push vehicles
     vehicles.push(new vehicleAI);
     vehicles[0].create();
+    // console.log(vehicles);
 
     // add controls to handles
     addControls(handle , bike)

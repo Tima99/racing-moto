@@ -6,18 +6,24 @@ const roadAnim = (roadObj)=>{
     roadObject = roadObj; // road object
 }
 
-function moveRoad(){
-
+let progress = 0 , start = null;
+function moveRoad(timestamp){
+    if( start == null) start = timestamp
+    progress = Math.floor((timestamp - start)/2);
+    start = timestamp;
+    
     if(gameOver){
         cancelAnimationFrame(roadAnimFrame)
         return;
     }
 
-    road.moveY += road.speed;
+    road.moveY += road.speed * progress;
     roadObject.style.backgroundPosition = `0 ${road.moveY}px`;
     collision() // detect collsion player-vehicle with other vehicles
+    if(moveBike)
+    handleRotate();
 
-    requestAnimationFrame(moveRoad)
+    roadAnimFrame = requestAnimationFrame(moveRoad)
 }
 
 export default roadAnim;

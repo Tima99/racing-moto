@@ -2,7 +2,7 @@ var main_container , game_container;
 
 let player = {
     moveX  : 0,
-    speed  : 1,
+    speed  : 2,
     offset : 8, // vehicle away from road when collide with road
     posX   : 0,
     posY   : 0,
@@ -11,9 +11,14 @@ let player = {
 }
 
 let score = 0;
+let handleRotate;
+let moveBike = false;
 
 let gameOver = false;
 let roadAnimFrame= null;
+let direction = null;
+let operator = null;
+
 const bikeSound = new Audio("./assets/bike-sound.mp3");
 
 

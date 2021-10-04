@@ -1,12 +1,11 @@
 let isMouseDown = false;
 let moveY = 0,
-    startY = 0;
-let direction = null,
-  rotateLimit = 40,
+    startY = 0,
+    previousStartY = 0;
+
+let  rotateLimit = 40,
   rotation = 0,
   rotationSpeed = 2;
-
-
 
 function addControls(handle , vehicle) {
   const handles = handle.querySelectorAll(".handle-side");
@@ -14,67 +13,74 @@ function addControls(handle , vehicle) {
   handles.forEach((handleOne, index) => {
     //for non-touch devices
     handleOne.addEventListener("mousedown", function (e) {
-      moveY = e.clientY;
+      previousStartY = e.clientY;
       isMouseDown = true;
     });
 
     handleOne.addEventListener("mousemove", function (e) {
+      e.preventDefault()
       if (isMouseDown) {
         startY = e.clientY;
-        moveY -= startY;
+        moveY = previousStartY - startY;
         direction = moveY >= 0 ? "U" : "D";
-        let operator = null;
         operator = index === 0 ? "+" : "-"; // index 0 is indicates left and 1 indicates right
-        rotateHandleAnim(handle, operator);
-        rotateVehicle(vehicle, operator);
-        moveY = startY;
+        if(!handleRotate)
+        handleRotate = ()=> rotateHandleAnim(handle, vehicle)
+        moveBike = true;
+        previousStartY = startY;
       }
     });
 
     handleOne.addEventListener("mouseup", function (e) {
       isMouseDown = false;
+      moveBike = false;
       resetHandlePos(handle);
     });
 
     // for touch devices
     handleOne.addEventListener("touchstart", function (e) {
-      moveY = e.changedTouches[0].clientY;
+      previousStartY = e.changedTouches[0].clientY;
       isMouseDown = true;
     });
 
     handleOne.addEventListener("touchmove", function (e) {
       e.preventDefault();
       if (isMouseDown) {
-        startY = e.changedTouches[0].clientY;
-        moveY -= startY;
+        startY = Math.floor(e.changedTouches[0].clientY);
+        moveY = previousStartY - startY;
         direction = moveY >= 0 ? "U" : "D";
-        let operator = null;
+        // console.log(direction)
         operator = index === 0 ? "+" : "-"; // index 0 is indicates left and 1 indicates right
-        rotateHandleAnim(handle, operator);
-        rotateVehicle(vehicle, operator);
-        moveY = startY;
+        if(!handleRotate)
+        handleRotate = ()=> rotateHandleAnim(handle, vehicle)
+        moveBike = true;
+        previousStartY = startY;
+        
       }
     });
 
     handleOne.addEventListener("touchend", function (e) {
       isMouseDown = false;
+      moveBike=false;
       resetHandlePos(handle);
     });
   });
 }
 
-function rotateHandleAnim(handle, operator) {
+function rotateHandleAnim(handle, vehicle) {
   if (direction === "U") {
     if (Math.abs(rotation) <= rotateLimit)
       rotation = eval(rotation + operator + rotationSpeed) ;
     handle.style.transform = `rotate(${rotation}deg)`;
-  } else {
-    operator = operator == "+" ? "-" : "+"; // revert operator if minus than add ,vice-versa
+  } else if(direction === 'D') {
+    let operator2 = operator == "+" ? "-" : "+"; // revert operator if minus than add ,vice-versa
+
     const isRotate =
-      operator === "-" ? rotation > -rotateLimit : rotation < rotateLimit;
-    if (isRotate) rotation = eval(rotation + operator + rotationSpeed);
+      operator2 === "-" ? rotation > -rotateLimit : rotation < rotateLimit;
+    if (isRotate) rotation = eval(rotation + operator2 + rotationSpeed);
     handle.style.transform = `rotate(${rotation}deg)`;
   }
+  rotateVehicle(vehicle);
 }
 
 function resetHandlePos(handle) {
@@ -82,18 +88,17 @@ function resetHandlePos(handle) {
   handle.style.transform = "rotate(0deg)";
 }
 
-function rotateVehicle(vehicleObject , operator){
+function rotateVehicle(vehicleObject ){
   if(gameOver) return;
   if(clampVehicle(vehicleObject)) return;
   moveY = moveY > 2 ? 2 : moveY; // clamp moveY value b/w - to +2
   let vehicleSpeed_wrt_handle = player.speed * Math.abs(moveY);
-
+  // console.log(vehicleSpeed_wrt_handle);
   if(direction === 'U'){
     player.moveX =  eval(player.moveX + operator + vehicleSpeed_wrt_handle) ; // moveY is speed of handle rotation
-
     vehicleObject.style.left = `${player.moveX}px`;
   }
-  else{
+  else if(direction === 'D'){
     operator = operator == "+" ? "-" : "+"; // revert operator if minus than add ,vice-versa
     player.moveX = eval(player.moveX + operator + vehicleSpeed_wrt_handle) ;
 

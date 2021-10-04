@@ -4,8 +4,8 @@ function collision(){
     
     vehicles.forEach((vehicle , index)=>{
 
-        if( player.posY < (vehicle.enemyVehicle.posY + vehicle.enemyVehicle.height) &&
-            (player.posY + player.height) > vehicle.enemyVehicle.posY &&
+        if( player.posY < (vehicle.enemyVehicle.posY + vehicle.enemyVehicle.height + 18) &&
+            (player.posY + player.height) > vehicle.enemyVehicle.posY + 18 &&
             player.posX < (vehicle.enemyVehicle.posX + vehicle.enemyVehicle.width - 42) &&
             (player.posX + player.width) > vehicle.enemyVehicle.posX + 42
           ){

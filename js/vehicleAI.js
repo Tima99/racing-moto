@@ -52,7 +52,7 @@ const vehicleAI = function(){
             this.pushAnotherVehicle();
         }
 
-        requestAnimationFrame(()=> { this.move() })
+        this.enemyVehicle.frameHold = requestAnimationFrame(()=> { this.move() })
     }
 
     this.checkVehicleOffsideScreen =  function(){
@@ -78,7 +78,6 @@ const vehicleAI = function(){
     this.pushAnotherVehicle = function(){
         vehicles.push(new vehicleAI);
         vehicles[vehicles.length - 1].create();
-
     }
 }
 
